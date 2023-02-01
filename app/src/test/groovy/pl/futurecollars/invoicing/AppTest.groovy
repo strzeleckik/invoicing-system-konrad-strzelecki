@@ -11,9 +11,11 @@ class AppTest extends Specification {
         def app = new App()
 
         when:
-        def result = app.greeting
+        def result = app.getGreeting()
 
         then:
         result != null
+        and:
+        app.main()
     }
 }
