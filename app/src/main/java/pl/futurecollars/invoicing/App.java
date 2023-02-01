@@ -4,9 +4,16 @@
 
 package pl.futurecollars.invoicing;
 
+import pl.futurecollars.invoicing.model.User;
+
 public class App {
 
   public String getGreeting() {
+
+    User user = User.builder()
+        .name("konrad")
+        .build();
+
     return "Hello World!";
   }
 
