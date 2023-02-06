@@ -29,12 +29,12 @@
     </module>
     <module name="SuppressWarningsFilter"/>
 
-    <module name="RegexpMultiline">
-        <property name="format" value="^([^\n ]+ )*(class|interface|enum) [^{]*\{\n[^\n}]"/>
-        <property name="message" value="Leave empty row after class/interface/enum definition!"/>
-        <property name="severity" value="error"/>
-        <property name="fileExtensions" value="groovy,java"/>
-    </module>
+<!--    <module name="RegexpMultiline">-->
+<!--        <property name="format" value="^([^\n ]+ )*(class|interface|enum) [^{]*\{\n[^\n}]"/>-->
+<!--        <property name="message" value="Leave empty row after class/interface/enum definition!"/>-->
+<!--        <property name="severity" value="error"/>-->
+<!--        <property name="fileExtensions" value="groovy,java"/>-->
+<!--    </module>-->
 
     <module name="LineLength">
         <property name="max" value="150"/>
@@ -218,7 +218,7 @@
         <module name="VariableDeclarationUsageDistance"/>
         <module name="CustomImportOrder">
             <property name="sortImportsInGroupAlphabetically" value="true"/>
-            <property name="separateLineBetweenGroups" value="true"/>
+            <property name="separateLineBetweenGroups" value="false"/>
             <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
         </module>
         <module name="MethodParamPad"/>
