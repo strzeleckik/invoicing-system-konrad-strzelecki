@@ -4,10 +4,15 @@
 
 package pl.futurecollars.invoicing;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import pl.futurecollars.invoicing.model.Company;
 import pl.futurecollars.invoicing.model.Invoice;
+import pl.futurecollars.invoicing.model.InvoiceEntry;
+import pl.futurecollars.invoicing.model.Vat;
+import pl.futurecollars.invoicing.service.JsonService;
 import pl.futurecollars.invoicing.utils.TextUtils;
 
 public class App {
@@ -19,11 +24,26 @@ public class App {
 
     System.out.println(new App().getGreeting());
 
-    List<Invoice> invoices = new ArrayList<>();
+    Company buyer = new Company("5213861303", "ul. Bukowińska 24d/7 02-703 Warszawa, Polska", "iCode Trust Sp. z o.o");
+    Company seller = new Company("552-168-66-00", "32-005 Niepolomice, Nagietkowa 19", "Piotr Kolacz Development");
 
-    Invoice invoice1 = new Invoice(1L, LocalDateTime.now(), "c1", "c2");
+    List<InvoiceEntry> products = List.of(new InvoiceEntry("Programming course", BigDecimal.valueOf(10000), BigDecimal.valueOf(2300), Vat.VAT_23));
 
-    String upperCaseText = TextUtils.capitalizeText("test");
+    Invoice invoice = new Invoice(1l, LocalDateTime.now(), buyer, seller, products);
+
+    List<Invoice> invoices = List.of(invoice);
+
+    String json = JsonService.getJsonFromObject(invoices);
+    System.out.println(json);
+
+    JsonService.saveJsonFile(json, "test.json");
+
+   Object invoices2 = JsonService.getObjectFromJson("test.json", Object.class);
+
+    List<Invoice> invoices3 = (List<Invoice>) invoices2;
+
+    System.out.println(invoices3);
+
   }
 
 }
