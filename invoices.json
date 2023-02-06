@@ -1,0 +1,19 @@
+[ {
+  "id" : "f884ba8d-a9e7-4658-9166-71df937e1000",
+  "date" : "2023-02-06",
+  "seller" : "selling company inc.",
+  "buyer" : "buyer company etc.",
+  "entries" : [ {
+    "price" : 1.3,
+    "quantity" : 1
+  } ]
+}, {
+  "id" : "60194d0e-5626-4abb-8d0c-5a3fa1a9bcf2",
+  "date" : "2023-02-06",
+  "seller" : "selling company inc.",
+  "buyer" : "buyer company etc.",
+  "entries" : [ {
+    "price" : 1.3,
+    "quantity" : 1
+  } ]
+} ]

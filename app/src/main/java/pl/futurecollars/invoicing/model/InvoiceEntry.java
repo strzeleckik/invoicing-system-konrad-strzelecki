@@ -1,7 +1,7 @@
 package pl.futurecollars.invoicing.model;
 
-import java.time.LocalDate;
-import java.util.List;
+
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,12 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Invoice {
+public class InvoiceEntry {
 
-  private String id;
-  private LocalDate date;
-  private String seller;
-  private String buyer;
+  private BigDecimal price;
+  private int quantity;
 
-  private List<InvoiceEntry> entries;
 }

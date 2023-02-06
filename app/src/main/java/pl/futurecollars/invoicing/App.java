@@ -4,11 +4,15 @@
 
 package pl.futurecollars.invoicing;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
+import pl.futurecollars.invoicing.configuration.Configuration;
+import pl.futurecollars.invoicing.db.Database;
+import pl.futurecollars.invoicing.db.FileDatabase;
 import pl.futurecollars.invoicing.model.Invoice;
-import pl.futurecollars.invoicing.utils.TextUtils;
+import pl.futurecollars.invoicing.model.InvoiceEntry;
+import pl.futurecollars.invoicing.service.FileService;
 
 public class App {
   public String getGreeting() {
@@ -19,11 +23,21 @@ public class App {
 
     System.out.println(new App().getGreeting());
 
-    List<Invoice> invoices = new ArrayList<>();
+    Database database = new FileDatabase(new FileService(), new Configuration("invoices.json"));
 
-    Invoice invoice1 = new Invoice(1L, LocalDateTime.now(), "c1", "c2");
+    Invoice invoice = Invoice.builder()
+        .buyer("buyer company etc.")
+        .seller("selling company inc.")
+        .date(LocalDate.now())
+        .entries(List.of(InvoiceEntry.builder().quantity(1).price(BigDecimal.valueOf(1.3)).build()))
+        .build();
 
-    String upperCaseText = TextUtils.capitalizeText("test");
+    database.save(invoice);
+
+    Invoice invoiceFromDb = database.getById("f884ba8d-a9e7-4658-9166-71df937e1000").orElse(new Invoice());
+
+    System.out.println(invoiceFromDb);
+
   }
 
 }
