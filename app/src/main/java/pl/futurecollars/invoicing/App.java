@@ -11,7 +11,6 @@ import pl.futurecollars.invoicing.model.Invoice;
 import pl.futurecollars.invoicing.utils.TextUtils;
 
 public class App {
-
   public String getGreeting() {
     return "Hello World!";
   }
