@@ -3,20 +3,17 @@ package pl.futurecollars.invoicing.db;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 import pl.futurecollars.invoicing.configuration.Configuration;
 import pl.futurecollars.invoicing.model.Invoice;
 import pl.futurecollars.invoicing.service.FileService;
 
+@RequiredArgsConstructor
 public class FileDatabase implements Database {
 
   private final FileService fileService;
 
   private final Configuration configuration;
-
-  public FileDatabase(FileService fileService, Configuration configuration) {
-    this.fileService = fileService;
-    this.configuration = configuration;
-  }
 
   @Override
   public void save(Invoice invoice) {
@@ -40,8 +37,7 @@ public class FileDatabase implements Database {
 
   @Override
   public List<Invoice> getAll() {
-    List<Invoice> invoices = fileService.getDataListFromFile(configuration.getDbPath(), Invoice.class);
-    return invoices;
+    return fileService.getDataListFromFile(configuration.getDbPath(), Invoice.class);
   }
 
   @Override
