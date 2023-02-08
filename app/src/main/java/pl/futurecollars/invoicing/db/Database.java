@@ -6,7 +6,7 @@ import pl.futurecollars.invoicing.model.Invoice;
 
 public interface Database {
 
-  void save(Invoice invoice);
+  String save(Invoice invoice);
 
   Optional<Invoice> getById(String id);
 

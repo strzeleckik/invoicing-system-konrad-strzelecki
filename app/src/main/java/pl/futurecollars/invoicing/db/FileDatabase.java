@@ -17,7 +17,7 @@ public class FileDatabase implements Database {
   private final Configuration configuration;
 
   @Override
-  public void save(Invoice invoice) {
+  public String save(Invoice invoice) {
     String uuid = UUID.randomUUID().toString();
     invoice.setId(uuid);
 
@@ -25,7 +25,7 @@ public class FileDatabase implements Database {
     invoices.add(invoice);
 
     fileService.writeDataToFile(configuration.getDbPath(), invoices);
-
+    return invoice.getId();
   }
 
   @Override
