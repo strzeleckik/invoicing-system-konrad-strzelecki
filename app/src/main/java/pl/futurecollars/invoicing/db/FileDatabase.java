@@ -1,5 +1,6 @@
 package pl.futurecollars.invoicing.db;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -41,12 +42,31 @@ public class FileDatabase implements Database {
   }
 
   @Override
-  public void update(int id, Invoice updatedInvoice) {
-
+  public void update(String id, Invoice updatedInvoice) {
+    List<Invoice> invoices = getAll();
+    invoices
+        .stream()
+        .filter(invoice -> invoice.getId().equals(id))
+        .findFirst()
+        .ifPresent(invoice -> {
+          invoice.setDate(updatedInvoice.getDate());
+          invoice.setBuyer(updatedInvoice.getBuyer());
+          invoice.setSeller(updatedInvoice.getSeller());
+          invoice.setEntries(updatedInvoice.getEntries());
+        });
+    fileService.writeDataToFile(configuration.getDbPath(), invoices);
   }
 
   @Override
-  public void delete(int id) {
-
+  public void delete(String id) {
+    List<Invoice> invoices = getAll();
+    Iterator<Invoice> i = invoices.iterator();
+    while (i.hasNext()) {
+      Invoice invoice = i.next();
+      if (invoice.getId().equals(id)) {
+        i.remove();
+      }
+    }
+    fileService.writeDataToFile(configuration.getDbPath(), invoices);
   }
 }

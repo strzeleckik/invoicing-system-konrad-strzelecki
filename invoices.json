@@ -1,6 +1,15 @@
 [ {
-  "id" : "f884ba8d-a9e7-4658-9166-71df937e1000",
-  "date" : "2023-02-06",
+  "id" : "60194d0e-5626-4abb-8d0c-5a3fa1a9bcf2",
+  "date" : "2023-01-27",
+  "seller" : "test123",
+  "buyer" : "test",
+  "entries" : [ {
+    "price" : 1.3,
+    "quantity" : 1
+  } ]
+}, {
+  "id" : "3f9d942d-7de5-4314-a36f-3a60e8d116c3",
+  "date" : "2023-02-08",
   "seller" : "selling company inc.",
   "buyer" : "buyer company etc.",
   "entries" : [ {
@@ -8,8 +17,53 @@
     "quantity" : 1
   } ]
 }, {
-  "id" : "60194d0e-5626-4abb-8d0c-5a3fa1a9bcf2",
-  "date" : "2023-02-06",
+  "id" : "01f9494c-13d7-494e-974d-04fdb54c2a2a",
+  "date" : "2023-02-08",
+  "seller" : "selling company inc.",
+  "buyer" : "buyer company etc.",
+  "entries" : [ {
+    "price" : 1.3,
+    "quantity" : 1
+  } ]
+}, {
+  "id" : "a560037a-a858-4f9c-96d4-0ed74af3a215",
+  "date" : "2023-02-08",
+  "seller" : "selling company inc.",
+  "buyer" : "buyer company etc.",
+  "entries" : [ {
+    "price" : 1.3,
+    "quantity" : 1
+  } ]
+}, {
+  "id" : "8338e16a-e03f-4f68-955a-31b3c2388390",
+  "date" : "2023-02-08",
+  "seller" : "selling company inc.",
+  "buyer" : "buyer company etc.",
+  "entries" : [ {
+    "price" : 1.3,
+    "quantity" : 1
+  } ]
+}, {
+  "id" : "2e6ddf5d-4fe0-4ea5-9e6c-dee49a59a192",
+  "date" : "2023-02-08",
+  "seller" : "selling company inc.",
+  "buyer" : "buyer company etc.",
+  "entries" : [ {
+    "price" : 1.3,
+    "quantity" : 1
+  } ]
+}, {
+  "id" : "1a48448d-366f-4612-b4d5-07961991d969",
+  "date" : "2023-01-27",
+  "seller" : "test123",
+  "buyer" : "test",
+  "entries" : [ {
+    "price" : 1.3,
+    "quantity" : 1
+  } ]
+}, {
+  "id" : "c299e3da-b246-4ee8-b5ae-e811c43b0b0c",
+  "date" : "2023-02-08",
   "seller" : "selling company inc.",
   "buyer" : "buyer company etc.",
   "entries" : [ {

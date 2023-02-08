@@ -34,9 +34,17 @@ public class App {
 
     database.save(invoice);
 
-    Invoice invoiceFromDb = database.getById("f884ba8d-a9e7-4658-9166-71df937e1000").orElse(new Invoice());
+    Invoice invoiceFromDb = database.getById("60194d0e-5626-4abb-8d0c-5a3fa1a9bcf2").orElse(new Invoice());
+
+    invoiceFromDb.setBuyer("test");
+    invoiceFromDb.setSeller("test123");
+    invoiceFromDb.setDate(LocalDate.now().minusDays(12));
+
+    database.update(invoiceFromDb.getId(), invoiceFromDb);
 
     System.out.println(invoiceFromDb);
+
+    database.delete("f884ba8d-a9e7-4658-9166-71df937e1000");
 
   }
 
