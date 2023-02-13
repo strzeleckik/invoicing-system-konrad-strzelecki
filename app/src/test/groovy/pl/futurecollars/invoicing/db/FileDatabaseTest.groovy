@@ -14,8 +14,8 @@ class FileDatabaseTest extends Specification {
 
     def "get all should return empty list when file with db data not exists"() {
         given:
-            database = new FileDatabase(new FileService(), new InvoicingAppConfiguration("notExistingFile.json"));
-
+            def appConfig = new InvoicingAppConfiguration("notExistingFile.json")
+            database = new FileDatabase(new FileService(appConfig.objectMapper()), appConfig);
         when:
             def invoices = database.getAll()
 
@@ -26,9 +26,9 @@ class FileDatabaseTest extends Specification {
 
     def "get all should return size 2 list when file with db data exists and records added"() {
         given:
-        def tmpFilePath = File.createTempFile('test', '.txt').getAbsolutePath()
-        database = new FileDatabase(new FileService(), new InvoicingAppConfiguration(tmpFilePath))
-
+            def tmpFilePath = File.createTempFile('test', '.txt').getAbsolutePath()
+            def appConfig = new InvoicingAppConfiguration(tmpFilePath)
+            database = new FileDatabase(new FileService(appConfig.objectMapper()), appConfig)
         when:
 
         database.save(Invoice.builder()
