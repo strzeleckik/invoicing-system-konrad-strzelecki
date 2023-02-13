@@ -22,6 +22,7 @@ class FileDatabaseTest extends Specification {
         then:
             0 == invoices.size()
 
+
     }
 
     def "get all should return size 2 list when file with db data exists and records added"() {
