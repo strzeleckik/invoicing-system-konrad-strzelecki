@@ -2,6 +2,8 @@ package pl.futurecollars.invoicing.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,24 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.futurecollars.invoicing.configuration.Configuration;
-import pl.futurecollars.invoicing.db.FileDatabase;
 import pl.futurecollars.invoicing.model.Invoice;
-import pl.futurecollars.invoicing.service.FileService;
 import pl.futurecollars.invoicing.service.InvoiceService;
 
 @RestController
 @RequestMapping("invoices")
+@RequiredArgsConstructor
 public class InvoiceController {
 
-  private InvoiceService invoiceService;
-
-  public InvoiceController() {
-    FileService fileService = new FileService();
-    Configuration configuration = new Configuration("invoices.json");
-    FileDatabase fileDatabase = new FileDatabase(fileService, configuration);
-    this.invoiceService = new InvoiceService(fileDatabase);
-  }
+  private final InvoiceService invoiceService;
 
   @GetMapping("/hello")
   public ResponseEntity<String> sayHello(@RequestParam(required = false) String name, @RequestParam int age) {

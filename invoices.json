@@ -82,4 +82,16 @@
     "price" : 1112.34,
     "quantity" : 200
   } ]
+}, {
+  "id" : "78a226f6-6423-4150-8484-c146348aff4a",
+  "date" : "2023-02-13",
+  "seller" : "Spring",
+  "buyer" : "Dependency injection",
+  "entries" : [ {
+    "price" : 5.00,
+    "quantity" : 10
+  }, {
+    "price" : 678.34,
+    "quantity" : 200
+  } ]
 } ]

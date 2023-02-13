@@ -1,6 +1,6 @@
 package pl.futurecollars.invoicing.db
 
-import pl.futurecollars.invoicing.configuration.Configuration
+import pl.futurecollars.invoicing.configuration.InvoicingAppConfiguration
 import pl.futurecollars.invoicing.model.Invoice
 import pl.futurecollars.invoicing.model.InvoiceEntry
 import pl.futurecollars.invoicing.service.FileService
@@ -14,7 +14,7 @@ class FileDatabaseTest extends Specification {
 
     def "get all should return empty list when file with db data not exists"() {
         given:
-            database = new FileDatabase(new FileService(), new Configuration("notExistingFile.json"));
+            database = new FileDatabase(new FileService(), new InvoicingAppConfiguration("notExistingFile.json"));
 
         when:
             def invoices = database.getAll()
@@ -27,7 +27,7 @@ class FileDatabaseTest extends Specification {
     def "get all should return size 2 list when file with db data exists and records added"() {
         given:
         def tmpFilePath = File.createTempFile('test', '.txt').getAbsolutePath()
-        database = new FileDatabase(new FileService(), new Configuration(tmpFilePath))
+        database = new FileDatabase(new FileService(), new InvoicingAppConfiguration(tmpFilePath))
 
         when:
 
