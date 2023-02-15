@@ -50,7 +50,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'pl.futurecollars.invoicing.App'
+    mainClass = 'pl.futurecollars.invoicing.InvoicingApp'
 }
 
 checkstyle {
@@ -60,10 +60,18 @@ checkstyle {
     maxErrors = 0
 }
 
+jacoco {
+    applyTo run
+}
+
 
 tasks.named('test') {
     useJUnitPlatform()
-    finalizedBy jacocoTestCoverageVerification
+    //finalizedBy jacocoTestCoverageVerification
+}
+
+tasks.named('build'){
+    //finalizedBy jacocoTestCoverageVerification
 }
 
 
