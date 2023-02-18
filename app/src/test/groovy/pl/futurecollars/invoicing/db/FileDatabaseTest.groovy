@@ -3,6 +3,7 @@ package pl.futurecollars.invoicing.db
 import pl.futurecollars.invoicing.configuration.InvoicingAppConfiguration
 import pl.futurecollars.invoicing.service.FileService
 
+
 class FileDatabaseTest extends AbstractDatabaseTest {
 
     @Override

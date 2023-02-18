@@ -1,14 +1,13 @@
 package pl.futurecollars.invoicing.db
 
-import pl.futurecollars.invoicing.model.Invoice
-import pl.futurecollars.invoicing.model.InvoiceEntry
+import pl.futurecollars.invoicing.helpers.TestHelpers
 import spock.lang.Specification
 
 import java.time.LocalDate
 
 abstract class AbstractDatabaseTest extends Specification {
 
-    private Database database;
+    Database database;
 
     abstract Database getDatabaseInstance()
 
@@ -16,29 +15,14 @@ abstract class AbstractDatabaseTest extends Specification {
         database = getDatabaseInstance()
     }
 
-    Invoice createInvoice() {
-        return Invoice.builder()
-                .date(LocalDate.of(2022, 01, 01))
-                .buyer("test Buyer")
-                .seller("test Seller")
-                .entries(List.of(InvoiceEntry
-                        .builder()
-                        .quantity(1)
-                        .price(BigDecimal.valueOf(1.3))
-                        .build()))
-                .build()
-    }
-
     def "get all should return proper amount of invoice items when records added properly"() {
         when:
-        database.save(createInvoice())
-        database.save(createInvoice())
+        (1..5).collect({database.save(TestHelpers.createInvoice())})
         def invoices = database.getAll()
 
         then:
-        2 == invoices.size()
+        5 == invoices.size()
     }
-
 
     def "getById Should return optional.empty when invoice not found"() {
         expect:
@@ -47,7 +31,7 @@ abstract class AbstractDatabaseTest extends Specification {
 
     def "getById should return optional with value"() {
         when:
-        def id = database.save(createInvoice())
+        def id = database.save(TestHelpers.createInvoice())
 
         then:
         database.getById(id).isPresent()
@@ -55,7 +39,7 @@ abstract class AbstractDatabaseTest extends Specification {
 
     def "should update invoice properly"(){
         given: "saving new invoice in db"
-        def invoice = createInvoice();
+        def invoice = TestHelpers.createInvoice();
         def id = database.save(invoice)
 
         and: "i edit invoices fields"
@@ -63,11 +47,10 @@ abstract class AbstractDatabaseTest extends Specification {
         invoice.setBuyer("edited buyer")
         invoice.setDate(LocalDate.of(2020, 12, 12))
         invoice.setSeller("edited seller")
-        invoice.setEntries(List.of(InvoiceEntry
-                .builder()
-                .quantity(3)
-                .price(BigDecimal.valueOf(100.2))
-                .build()))
+        invoice.setEntries(
+                (1..4).collect(
+                        {TestHelpers.createInvoiceEntry()}
+                ))
 
         when: "i call update method"
 
@@ -84,7 +67,7 @@ abstract class AbstractDatabaseTest extends Specification {
 
     def "should delete element"(){
         given:
-        def id = database.save(createInvoice())
+        def id = database.save(TestHelpers.createInvoice())
 
         when:
         database.delete(id)
@@ -92,5 +75,4 @@ abstract class AbstractDatabaseTest extends Specification {
         then:
         database.getById(id).isEmpty()
     }
-
 }
