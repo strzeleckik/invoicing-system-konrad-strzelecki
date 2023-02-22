@@ -5,13 +5,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import pl.futurecollars.invoicing.configuration.InvoicingAppConfiguration;
 import pl.futurecollars.invoicing.model.Invoice;
 import pl.futurecollars.invoicing.service.FileService;
 
-@Primary
 @Repository
 @RequiredArgsConstructor
 public class FileDatabase implements Database {

@@ -1,19 +1,18 @@
 package pl.futurecollars.invoicing
 
-
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 import pl.futurecollars.invoicing.service.InvoiceService
 import spock.lang.Specification
 
+@SpringBootTest
 class InvoicingAppTest extends Specification {
 
-
+    @Autowired
     private InvoiceService invoiceService;
 
-    def "application main starts without problems"() {
-        setup:
-        def app = new InvoicingApp()
-
-        and:
-        app.main()
+    def "invoice service is created"() {
+        expect:
+        invoiceService != null
     }
 }

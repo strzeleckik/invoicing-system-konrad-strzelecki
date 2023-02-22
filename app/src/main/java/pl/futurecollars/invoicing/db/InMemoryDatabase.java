@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import pl.futurecollars.invoicing.model.Invoice;
 
+@Primary
 @Repository
 public class InMemoryDatabase implements Database {
 
@@ -14,7 +16,9 @@ public class InMemoryDatabase implements Database {
 
   @Override
   public String save(Invoice invoice) {
-    invoice.setId(UUID.randomUUID().toString());
+    if (invoice.getId() == null && invoice.getId().isBlank()) {
+      invoice.setId(UUID.randomUUID().toString());
+    }
     invoices.add(invoice);
     return invoice.getId();
   }
