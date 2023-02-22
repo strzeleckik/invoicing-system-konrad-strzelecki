@@ -3,6 +3,7 @@ package pl.futurecollars.invoicing.service
 
 import pl.futurecollars.invoicing.db.Database
 import pl.futurecollars.invoicing.helpers.TestHelper
+import pl.futurecollars.invoicing.model.Invoice
 import spock.lang.Specification
 
 class InvoiceServiceTest extends Specification {
@@ -64,9 +65,10 @@ class InvoiceServiceTest extends Specification {
     def "calling getById should return expected invoice"() {
         given:
         def invoice = TestHelper.createInvoice()
+        def invoiceCopy = TestHelper.createInvoice(invoice.getId())
 
         and:
-        database.getById(invoice.getId()) >> Optional.of(invoice)
+        database.getById(invoice.getId()) >> Optional.of(invoiceCopy)
 
         when:
         def resultInvoice = invoiceService.getById(invoice.getId())

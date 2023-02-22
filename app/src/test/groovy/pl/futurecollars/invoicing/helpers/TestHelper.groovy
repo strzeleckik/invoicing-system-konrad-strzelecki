@@ -6,6 +6,13 @@ import pl.futurecollars.invoicing.model.InvoiceEntry
 import java.time.LocalDate
 
 class TestHelper {
+
+    static Invoice createInvoice(String id){
+        Invoice invoice = createInvoice()
+        invoice.setId(id)
+        return invoice
+    }
+
     static Invoice createInvoice(){
         return Invoice.builder()
                 .id(UUID.randomUUID().toString())

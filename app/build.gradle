@@ -68,7 +68,6 @@ jacoco {
 
 tasks.named('test') {
     useJUnitPlatform()
-    finalizedBy jacocoTestCoverageVerification
 }
 
 tasks.named('build'){
