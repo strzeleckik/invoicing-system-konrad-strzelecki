@@ -11,9 +11,7 @@ import pl.futurecollars.invoicing.helpers.TestHelpers
 import pl.futurecollars.invoicing.model.Invoice
 import spock.lang.Specification
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @AutoConfigureMockMvc
@@ -27,6 +25,17 @@ class InvoiceControllerTest extends Specification {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    def "maximum of two numbers"(int a, int b, int c) {
+        expect:
+        Math.max(a, b) == c
+
+        where:
+        a | b | c
+        1 | 3 | 3
+        7 | 4 | 7
+        0 | 0 | 0
+    }
 
     def "empty array is returned when no invoices were created"(){
         when:
@@ -51,7 +60,7 @@ class InvoiceControllerTest extends Specification {
 
 
         where:
-        id << [-100, -2, -1, 0, 168, 1256]
+        id << ["aa", "bbn", "cc", "dd", "ee", "ff", "gg", "hh"]
     }
 
     def "invoice date can be modified"() {
