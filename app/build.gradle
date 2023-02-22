@@ -30,6 +30,7 @@ dependencies {
 
     // Use the awesome Spock testing and specification framework even with Java
     testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
+    testImplementation 'org.spockframework:spock-spring:2.0-groovy-3.0'
     testImplementation 'junit:junit:4.13.2'
 
     // This dependency is used by the application.
@@ -67,11 +68,11 @@ jacoco {
 
 tasks.named('test') {
     useJUnitPlatform()
-   // finalizedBy jacocoTestCoverageVerification
+    finalizedBy jacocoTestCoverageVerification
 }
 
 tasks.named('build'){
-    //finalizedBy jacocoTestCoverageVerification
+    finalizedBy jacocoTestCoverageVerification
 }
 
 
@@ -89,6 +90,14 @@ jacocoTestCoverageVerification {
                 minimum = 0.80
             }
         }
+
+//        afterEvaluate {
+//            classDirectories.setFrom(files(classDirectories.files.collect {
+//                fileTree(dir: it, exclude: [
+//                        'pl/futurecollars/invoicing/db/*'
+//                ])
+//            }))
+//        }
 
 
     }

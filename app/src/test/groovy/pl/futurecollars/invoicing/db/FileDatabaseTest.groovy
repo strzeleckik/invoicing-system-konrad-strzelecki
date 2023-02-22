@@ -1,16 +1,16 @@
 package pl.futurecollars.invoicing.db
 
 import pl.futurecollars.invoicing.configuration.InvoicingAppConfiguration
-import pl.futurecollars.invoicing.model.Invoice
-import pl.futurecollars.invoicing.model.InvoiceEntry
 import pl.futurecollars.invoicing.service.FileService
-import spock.lang.Specification
 
-import java.time.LocalDate
+class FileDatabaseTest extends AbstractDatabaseTest {
 
-class FileDatabaseTest extends Specification {
-
-    private Database database
+    @Override
+    Database initDatabase() {
+        def tmpFilePath = File.createTempFile('test', '.txt').getAbsolutePath()
+        def appConfig = new InvoicingAppConfiguration(tmpFilePath)
+        return new FileDatabase(new FileService(appConfig.objectMapper()), appConfig)
+    }
 
     def "get all should return empty list when file with db data not exists"() {
         given:
@@ -22,37 +22,7 @@ class FileDatabaseTest extends Specification {
         then:
             0 == invoices.size()
 
-
     }
 
-    def "get all should return size 2 list when file with db data exists and records added"() {
-        given:
-            def tmpFilePath = File.createTempFile('test', '.txt').getAbsolutePath()
-            def appConfig = new InvoicingAppConfiguration(tmpFilePath)
-            database = new FileDatabase(new FileService(appConfig.objectMapper()), appConfig)
-        when:
 
-        database.save(Invoice.builder()
-                .date(LocalDate.now())
-                .buyer("test buyer")
-                .seller("testSeller")
-                .entries(List.of(InvoiceEntry
-                        .builder()
-                        .quantity(1)
-                        .price(BigDecimal.valueOf(1.3))
-                        .build()))
-                .build())
-
-        database.save(Invoice.builder()
-                .date(LocalDate.now())
-                .buyer("test buyer")
-                .seller("testSeller")
-                .build())
-
-        def invoices = database.getAll()
-
-        then:
-        2 == invoices.size()
-
-    }
 }

@@ -16,7 +16,9 @@ public class InMemoryDatabase implements Database {
 
   @Override
   public String save(Invoice invoice) {
-    invoice.setId(UUID.randomUUID().toString());
+    if (invoice.getId() == null) {
+      invoice.setId(UUID.randomUUID().toString());
+    }
     invoices.add(invoice);
     return invoice.getId();
   }
