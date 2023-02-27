@@ -5,11 +5,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 import pl.futurecollars.invoicing.configuration.InvoicingAppConfiguration;
 import pl.futurecollars.invoicing.model.Invoice;
 import pl.futurecollars.invoicing.service.FileService;
 
+@Slf4j
+@ConditionalOnProperty(value = "invoicing-system.database.type", havingValue = "file")
 @Repository
 @RequiredArgsConstructor
 public class FileDatabase implements Database {
@@ -24,6 +28,7 @@ public class FileDatabase implements Database {
     invoice.setId(uuid);
 
     List<Invoice> invoices = getAll();
+    log.debug("invoices.size = {}", invoices.size());
     invoices.add(invoice);
 
     fileService.writeDataToFile(configuration.getDbPath(), invoices);
@@ -32,6 +37,11 @@ public class FileDatabase implements Database {
 
   @Override
   public Optional<Invoice> getById(String id) {
+    log.info("getById(id = {})", id);
+    log.debug("getById(id = {})", id);
+    log.warn("getById(id = {})", id);
+    log.error("getById(id = {})", id);
+    log.trace("getById(id = {})", id);
     return getAll()
         .stream()
         .filter(invoice -> invoice.getId().equals(id))
@@ -45,6 +55,7 @@ public class FileDatabase implements Database {
 
   @Override
   public void update(String id, Invoice updatedInvoice) {
+
     List<Invoice> invoices = getAll();
     invoices
         .stream()
