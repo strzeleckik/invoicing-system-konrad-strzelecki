@@ -5,3 +5,9 @@ invoicing-system:
   database:
     type: inmemory
     dbPath:
+
+logging:
+  level:
+    pl:
+      futurecollars:
+        invoicing: TRACE
