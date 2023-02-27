@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import org.springframework.context.annotation.Primary;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 import pl.futurecollars.invoicing.model.Invoice;
 
-@Primary
+@ConditionalOnProperty(value = "invoicing-system.database.type", havingValue = "inmemory")
 @Repository
 public class InMemoryDatabase implements Database {
 
@@ -25,6 +25,7 @@ public class InMemoryDatabase implements Database {
 
   @Override
   public Optional<Invoice> getById(String id) {
+    System.out.println("inMemory database getById(id = " + id + ")");
     return invoices.stream()
         .filter(invoice -> invoice.getId().equals(id))
         .findFirst();
