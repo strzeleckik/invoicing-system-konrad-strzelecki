@@ -28,4 +28,8 @@ public class InvoiceService {
   public String save(Invoice invoice) {
     return database.save(invoice);
   }
+
+  public void update(String id, Invoice invoice) {
+    database.update(id, invoice);
+  }
 }
