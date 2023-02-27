@@ -1,0 +1,7 @@
+server:
+  port: 9999
+
+invoicing-system:
+  database:
+    type: file
+    directory: invoices.json

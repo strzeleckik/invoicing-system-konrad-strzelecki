@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +16,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class InvoicingAppConfiguration {
 
-  private String dbPath = "invoices.json";
+  @Value("${invoicing-system.database.directory}")
+  private String dbPath;
 
   @Bean
   public ObjectMapper objectMapper() {
