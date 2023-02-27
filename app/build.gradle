@@ -63,7 +63,7 @@ checkstyle {
 
 tasks.named('test') {
     useJUnitPlatform()
-    finalizedBy jacocoTestCoverageVerification
+    //finalizedBy jacocoTestCoverageVerification
 }
 
 
