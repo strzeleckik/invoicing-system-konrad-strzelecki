@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 import pl.futurecollars.invoicing.configuration.InvoicingAppConfiguration;
 import pl.futurecollars.invoicing.model.Invoice;
 import pl.futurecollars.invoicing.service.FileService;
 
+@ConditionalOnProperty(value = "invoicing-system.database.type", havingValue = "file")
 @Repository
 @RequiredArgsConstructor
 public class FileDatabase implements Database {
