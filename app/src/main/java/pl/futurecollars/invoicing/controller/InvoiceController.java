@@ -2,6 +2,7 @@ package pl.futurecollars.invoicing.controller;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.futurecollars.invoicing.model.Invoice;
 import pl.futurecollars.invoicing.service.InvoiceService;
 
+@Slf4j
 @RestController
 @RequestMapping("invoices")
 @RequiredArgsConstructor
@@ -28,6 +30,11 @@ public class InvoiceController {
 
   @GetMapping("/{id}")
   public ResponseEntity<Invoice> getById(@PathVariable String id) {
+    log.info("controller getById(id = {})", id);
+    log.debug("controller getById(id = {})", id);
+    log.warn("controller getById(id = {})", id);
+    log.error("controller getById(id = {})", id);
+    log.trace("controller getById(id = {})", id);
     return invoiceService.getById(id)
         .map(invoice -> ResponseEntity.ok().body(invoice))
         .orElse(ResponseEntity.notFound().build());
