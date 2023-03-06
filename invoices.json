@@ -1,21 +1,79 @@
 [ {
-  "id" : "f13afcbd-b859-40a3-b0d9-3bcde9d884f0",
+  "id" : "898e0d38-a0df-400e-90a5-a990fb2e7800",
   "date" : "2023-02-28",
   "seller" : {
-    "taxIdentificationNumber" : "552-168-66-00",
+    "taxIdentificationNumber" : "222",
     "address" : "ul. Mazowiecka 134, 32-525 Radzionkow",
     "name" : "Invoice House Ltd."
   },
   "buyer" : {
-    "taxIdentificationNumber" : "552-168-66-00",
+    "taxIdentificationNumber" : "111",
     "address" : "ul. Mazowiecka 134, 32-525 Radzionkow",
     "name" : "Invoice House Ltd."
   },
   "entries" : [ {
-    "price" : 1,
-    "quantity" : 1
+    "description" : "service 1",
+    "quantity" : 2,
+    "price" : 123.00,
+    "vatValue" : 23.00,
+    "vatRate" : "VAT_23"
   }, {
-    "price" : 12,
-    "quantity" : 13
+    "description" : "service 2",
+    "quantity" : 1,
+    "price" : 246.00,
+    "vatValue" : 46.00,
+    "vatRate" : "VAT_23"
+  } ]
+}, {
+  "id" : "d7197521-f522-4471-997a-56c710ef7ba1",
+  "date" : "2023-02-28",
+  "seller" : {
+    "taxIdentificationNumber" : "222",
+    "address" : "ul. Mazowiecka 134, 32-525 Radzionkow",
+    "name" : "Invoice House Ltd."
+  },
+  "buyer" : {
+    "taxIdentificationNumber" : "111",
+    "address" : "ul. Mazowiecka 134, 32-525 Radzionkow",
+    "name" : "Invoice House Ltd."
+  },
+  "entries" : [ {
+    "description" : "service 1",
+    "quantity" : 2,
+    "price" : 108.00,
+    "vatValue" : 8.00,
+    "vatRate" : "VAT_8"
+  }, {
+    "description" : "service 2",
+    "quantity" : 1,
+    "price" : 216.00,
+    "vatValue" : 16.00,
+    "vatRate" : "VAT_8"
+  } ]
+}, {
+  "id" : "86412c97-6fa7-448e-9a59-8ad66f25a91a",
+  "date" : "2023-02-28",
+  "seller" : {
+    "taxIdentificationNumber" : "111",
+    "address" : "ul. Mazowiecka 134, 32-525 Radzionkow",
+    "name" : "Invoice House Ltd."
+  },
+  "buyer" : {
+    "taxIdentificationNumber" : "333",
+    "address" : "ul. Mazowiecka 134, 32-525 Radzionkow",
+    "name" : "Invoice House Ltd."
+  },
+  "entries" : [ {
+    "description" : "service 1",
+    "quantity" : 2,
+    "price" : 108.00,
+    "vatValue" : 8.00,
+    "vatRate" : "VAT_8"
+  }, {
+    "description" : "service 2",
+    "quantity" : 1,
+    "price" : 216.00,
+    "vatValue" : 16.00,
+    "vatRate" : "VAT_8"
   } ]
 } ]
