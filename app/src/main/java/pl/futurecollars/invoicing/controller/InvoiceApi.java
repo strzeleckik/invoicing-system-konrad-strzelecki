@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.futurecollars.invoicing.dto.TaxCalculatorDto;
 import pl.futurecollars.invoicing.model.Invoice;
 
 @Api(tags = {"invoice-controller"})
 
 public interface InvoiceApi {
+
+  @GetMapping("/{taxId}")
+  ResponseEntity<TaxCalculatorDto> getTaxCalculations(String taxId);
 
   @ApiOperation(value = "API to list all invoices in the system")
   ResponseEntity<List<Invoice>> getAllInvoices();

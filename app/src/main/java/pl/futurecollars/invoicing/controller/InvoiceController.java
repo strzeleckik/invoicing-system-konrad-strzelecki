@@ -1,9 +1,5 @@
 package pl.futurecollars.invoicing.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.futurecollars.invoicing.dto.TaxCalculatorDto;
 import pl.futurecollars.invoicing.model.Invoice;
 import pl.futurecollars.invoicing.service.InvoiceService;
+import pl.futurecollars.invoicing.service.TaxCalculationService;
 
 
 @Slf4j
@@ -27,6 +25,14 @@ import pl.futurecollars.invoicing.service.InvoiceService;
 public class InvoiceController implements InvoiceApi {
 
   private final InvoiceService invoiceService;
+
+  private final TaxCalculationService taxCalculationService;
+
+  @Override
+  @GetMapping("/tax/{taxId}")
+  public ResponseEntity<TaxCalculatorDto> getTaxCalculations(@PathVariable String taxId){
+    return ResponseEntity.ok(taxCalculationService.getTaxCalculations(taxId));
+  }
 
   @Override
   @GetMapping
