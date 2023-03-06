@@ -19,8 +19,8 @@ public class Invoice {
   private LocalDate date;
 
   @ApiModelProperty(value = "company that sells", required = true, example = "Github")
-  private String seller;
-  private String buyer;
+  private Company seller;
+  private Company buyer;
 
   private List<InvoiceEntry> entries;
 }

@@ -70,8 +70,8 @@ class InvoiceControllerTest extends Specification {
         def newInvoice = TestHelper.createInvoice()
         def id = addInvoiceAndReturnId(newInvoice)
         def updatedInvoice = newInvoice
-        updatedInvoice.setSeller("new seller")
-        updatedInvoice.setBuyer("new buyer")
+        updatedInvoice.setSeller(TestHelper.company(id))
+        updatedInvoice.setBuyer(TestHelper.company(id+ "buyer"))
         expect:
         mockMvc.perform(
                 put("$ENDPOINT/$id")
