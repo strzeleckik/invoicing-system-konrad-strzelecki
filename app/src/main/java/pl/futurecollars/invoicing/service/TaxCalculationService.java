@@ -1,8 +1,6 @@
 package pl.futurecollars.invoicing.service;
 
 
-import java.math.BigDecimal;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,18 +20,10 @@ public class TaxCalculationService {
   public TaxCalculationDto prepareTaxCalculationDto(String taxId){
     log.info("prepareTaxCalculationDto(taxId = {})", taxId);
     return TaxCalculationDto.builder()
-        .income(visit(sellerPredicate(taxId), InvoiceEntry::getPrice))
-        .incomingVat(visit(sellerPredicate(taxId), InvoiceEntry::getVatValue))
-        .cost(visit(buyerPredicate(taxId), InvoiceEntry::getPrice))
+        .income(database.visit(sellerPredicate(taxId), InvoiceEntry::getPrice))
+        .incomingVat(database.visit(sellerPredicate(taxId), InvoiceEntry::getVatValue))
+        .cost(database.visit(buyerPredicate(taxId), InvoiceEntry::getPrice))
         .build();
-  }
-
-  private BigDecimal visit(Predicate<Invoice> predicate, Function<InvoiceEntry, BigDecimal> invoiceEntryToAmount){
-    return database.getAll().stream()
-        .filter(predicate)
-        .flatMap(invoice -> invoice.getEntries().stream())
-        .map(invoiceEntryToAmount)
-        .reduce(BigDecimal.ZERO, BigDecimal::add);
   }
 
   private Predicate<Invoice> sellerPredicate(String taxId) {
