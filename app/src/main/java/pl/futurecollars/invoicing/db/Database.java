@@ -20,7 +20,7 @@ public interface Database {
 
   void delete(String id);
 
-  default BigDecimal visit(Predicate<Invoice> predicate, Function<InvoiceEntry, BigDecimal> invoiceEntryToAmount){
+  default BigDecimal visit(Predicate<Invoice> predicate, Function<InvoiceEntry, BigDecimal> invoiceEntryToAmount) {
     return getAll().stream()
         .filter(predicate)
         .flatMap(invoice -> invoice.getEntries().stream())

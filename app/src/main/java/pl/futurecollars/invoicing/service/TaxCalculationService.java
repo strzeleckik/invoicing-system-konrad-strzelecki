@@ -1,6 +1,5 @@
 package pl.futurecollars.invoicing.service;
 
-
 import java.util.function.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +16,7 @@ public class TaxCalculationService {
 
   private final Database database;
 
-  public TaxCalculationDto prepareTaxCalculationDto(String taxId){
+  public TaxCalculationDto prepareTaxCalculationDto(String taxId) {
     log.info("prepareTaxCalculationDto(taxId = {})", taxId);
     return TaxCalculationDto.builder()
         .income(database.visit(sellerPredicate(taxId), InvoiceEntry::getPrice))
