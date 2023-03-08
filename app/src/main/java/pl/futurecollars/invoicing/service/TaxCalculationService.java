@@ -1,5 +1,6 @@
 package pl.futurecollars.invoicing.service;
 
+import java.math.BigDecimal;
 import java.util.function.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +17,39 @@ public class TaxCalculationService {
 
   private final Database database;
 
-  public TaxCalculationDto prepareTaxCalculationDto(String taxId) {
-    log.info("prepareTaxCalculationDto(taxId = {})", taxId);
+  public TaxCalculationDto prepareTaxCalculationDto(String taxIdentificationNumber) {
     return TaxCalculationDto.builder()
-        .income(database.visit(sellerPredicate(taxId), InvoiceEntry::getPrice))
-        .incomingVat(database.visit(sellerPredicate(taxId), InvoiceEntry::getVatValue))
-        .cost(database.visit(buyerPredicate(taxId), InvoiceEntry::getPrice))
+        .income(income(taxIdentificationNumber))
+        .costs(costs(taxIdentificationNumber))
+        .earnings(getEarnings(taxIdentificationNumber))
+        .incomingVat(incomingVat(taxIdentificationNumber))
+        .outgoingVat(outgoingVat(taxIdentificationNumber))
+        .vatToReturn(getVatToReturn(taxIdentificationNumber))
         .build();
+  }
+
+  public BigDecimal income(String taxIdentificationNumber) {
+    return database.visit(sellerPredicate(taxIdentificationNumber), InvoiceEntry::getPrice);
+  }
+
+  public BigDecimal costs(String taxIdentificationNumber) {
+    return database.visit(buyerPredicate(taxIdentificationNumber), InvoiceEntry::getPrice);
+  }
+
+  public BigDecimal incomingVat(String taxIdentificationNumber) {
+    return database.visit(sellerPredicate(taxIdentificationNumber), InvoiceEntry::getVatValue);
+  }
+
+  public BigDecimal outgoingVat(String taxIdentificationNumber) {
+    return database.visit(buyerPredicate(taxIdentificationNumber), InvoiceEntry::getVatValue);
+  }
+
+  public BigDecimal getEarnings(String taxIdentificationNumber) {
+    return income(taxIdentificationNumber).subtract(costs(taxIdentificationNumber));
+  }
+
+  public BigDecimal getVatToReturn(String taxIdentificationNumber) {
+    return incomingVat(taxIdentificationNumber).subtract(outgoingVat(taxIdentificationNumber));
   }
 
   private Predicate<Invoice> sellerPredicate(String taxId) {

@@ -11,8 +11,12 @@ import lombok.Data;
 public class TaxCalculationDto {
 
   private final BigDecimal income;
+  private final BigDecimal costs;
+  private final BigDecimal earnings;
+
   private final BigDecimal incomingVat;
-  private final BigDecimal cost;
+  private final BigDecimal outgoingVat;
+  private final BigDecimal vatToReturn;
 
 
 }
