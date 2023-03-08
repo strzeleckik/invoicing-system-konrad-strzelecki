@@ -15,7 +15,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class SpringFoxConfig {
 
   @Bean
-  public Docket docket(){
+  public Docket docket() {
     return new Docket(DocumentationType.SWAGGER_2)
         .select()
         .apis(RequestHandlerSelectors.basePackage("pl.futurecollars.invoicing.controller"))
@@ -40,7 +40,5 @@ public class SpringFoxConfig {
         )
         .build();
   }
-
-
 
 }

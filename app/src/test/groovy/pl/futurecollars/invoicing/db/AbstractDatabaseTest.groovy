@@ -46,9 +46,9 @@ abstract class AbstractDatabaseTest extends Specification {
 
         and: "i edit invoices fields"
         invoice.setId(id)
-        invoice.setBuyer("edited buyer")
+        invoice.setBuyer(TestHelper.company(id + "buyer"))
         invoice.setDate(LocalDate.of(2020, 12, 12))
-        invoice.setSeller("edited seller")
+        invoice.setSeller(TestHelper.company(id))
         invoice.setEntries(
                 (1..4).collect(
                         {TestHelper.createInvoiceEntry()}
