@@ -17,15 +17,32 @@ public class TaxCalculationService {
 
   private final Database database;
 
+  private static final BigDecimal TAX_RATE = new BigDecimal(0.19);
+
   public TaxCalculationDto prepareTaxCalculationDto(String taxIdentificationNumber) {
+
+    BigDecimal earnings = getEarnings(taxIdentificationNumber);
+    BigDecimal taxToPay = calculateTaxToPay(earnings);
+    BigDecimal netIncome = calculateNetIncome(earnings, taxToPay);
+
     return TaxCalculationDto.builder()
         .income(income(taxIdentificationNumber))
         .costs(costs(taxIdentificationNumber))
-        .earnings(getEarnings(taxIdentificationNumber))
+        .earnings(earnings)
         .incomingVat(incomingVat(taxIdentificationNumber))
         .outgoingVat(outgoingVat(taxIdentificationNumber))
         .vatToReturn(getVatToReturn(taxIdentificationNumber))
+        .taxToPay(taxToPay)
+        .netIncome(netIncome)
         .build();
+  }
+
+  public BigDecimal calculateTaxToPay(BigDecimal earnings) {
+    return earnings.multiply(TAX_RATE);
+  }
+
+  public BigDecimal calculateNetIncome(BigDecimal earnings, BigDecimal taxToPay){
+    return earnings.subtract(taxToPay);
   }
 
   public BigDecimal income(String taxIdentificationNumber) {
@@ -49,7 +66,7 @@ public class TaxCalculationService {
   }
 
   public BigDecimal getVatToReturn(String taxIdentificationNumber) {
-    return incomingVat(taxIdentificationNumber).subtract(outgoingVat(taxIdentificationNumber));
+    return outgoingVat(taxIdentificationNumber).subtract(incomingVat(taxIdentificationNumber));
   }
 
   private Predicate<Invoice> sellerPredicate(String taxId) {

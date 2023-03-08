@@ -14,6 +14,9 @@ public class TaxCalculationDto {
   private final BigDecimal costs;
   private final BigDecimal earnings;
 
+  private final BigDecimal netIncome;
+  private final BigDecimal taxToPay;
+
   private final BigDecimal incomingVat;
   private final BigDecimal outgoingVat;
   private final BigDecimal vatToReturn;

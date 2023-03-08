@@ -76,4 +76,24 @@
     "vatValue" : 16.00,
     "vatRate" : "VAT_8"
   } ]
+}, {
+  "id" : "42438de4-c9fa-405b-b1bd-6440e70cdc5e",
+  "date" : "2023-02-28",
+  "seller" : {
+    "taxIdentificationNumber" : "111",
+    "address" : "ul. Mazowiecka 134, 32-525 Radzionkow",
+    "name" : "Invoice House Ltd."
+  },
+  "buyer" : {
+    "taxIdentificationNumber" : "333",
+    "address" : "ul. Mazowiecka 134, 32-525 Radzionkow",
+    "name" : "Invoice House Ltd."
+  },
+  "entries" : [ {
+    "description" : "Service ABC",
+    "quantity" : 1,
+    "price" : 1000,
+    "vatValue" : 230,
+    "vatRate" : "VAT_23"
+  } ]
 } ]
