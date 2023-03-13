@@ -1,0 +1,16 @@
+server:
+  port: 8888
+
+invoicing-system:
+  database:
+    type: inmemory
+    dbPath:
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/invoicing
+    username: postgres
+    password: admin1234
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
