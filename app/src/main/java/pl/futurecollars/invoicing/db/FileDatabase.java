@@ -38,10 +38,6 @@ public class FileDatabase implements Database {
   @Override
   public Optional<Invoice> getById(String id) {
     log.info("getById(id = {})", id);
-    log.debug("getById(id = {})", id);
-    log.warn("getById(id = {})", id);
-    log.error("getById(id = {})", id);
-    log.trace("getById(id = {})", id);
     return getAll()
         .stream()
         .filter(invoice -> invoice.getId().equals(id))
