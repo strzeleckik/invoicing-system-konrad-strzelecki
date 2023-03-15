@@ -54,6 +54,7 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter-jdbc"
 
+    runtimeOnly 'com.h2database:h2:1.4.200'
     runtimeOnly 'org.postgresql:postgresql:42.2.19'
 
     implementation "org.flywaydb:flyway-core:${flywayVersion}"

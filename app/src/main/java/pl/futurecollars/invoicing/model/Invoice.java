@@ -23,4 +23,6 @@ public class Invoice {
   private Company buyer;
 
   private List<InvoiceEntry> entries;
+
+  private String number;
 }
