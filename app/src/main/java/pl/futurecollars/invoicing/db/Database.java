@@ -10,22 +10,24 @@ import pl.futurecollars.invoicing.model.InvoiceEntry;
 
 public interface Database {
 
-  String save(Invoice invoice);
+  int save(Invoice invoice);
 
-  Optional<Invoice> getById(String id);
+  Optional<Invoice> getById(int id);
 
   List<Invoice> getAll();
 
-  void update(String id, Invoice updatedInvoice);
+  Optional<Invoice> update(int id, Invoice updatedInvoice);
 
-  void delete(String id);
+  Optional<Invoice> delete(int id);
 
-  default BigDecimal visit(Predicate<Invoice> predicate, Function<InvoiceEntry, BigDecimal> invoiceEntryToAmount) {
+  default BigDecimal visit(
+      Predicate<Invoice> invoicePredicate,
+      Function<InvoiceEntry, BigDecimal> invoiceEntryToValue
+  ) {
     return getAll().stream()
-        .filter(predicate)
-        .flatMap(invoice -> invoice.getEntries().stream())
-        .map(invoiceEntryToAmount)
+        .filter(invoicePredicate)
+        .flatMap(i -> i.getEntries().stream())
+        .map(invoiceEntryToValue)
         .reduce(BigDecimal.ZERO, BigDecimal::add);
   }
-
 }
