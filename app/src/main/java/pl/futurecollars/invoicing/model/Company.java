@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Company {
 
+  private Long id;
   @ApiModelProperty(value = "Tax identification number", required = true, example = "552-168-66-00")
   private String taxIdentificationNumber;
 

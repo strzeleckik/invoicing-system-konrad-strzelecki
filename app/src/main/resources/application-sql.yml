@@ -1,0 +1,22 @@
+server:
+  port: 7777
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/invoicing
+    username: postgres
+    password: admin1234
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+
+invoicing-system:
+  database:
+    type: sql
+    dbPath:
+
+logging:
+  level:
+    pl:
+      futurecollars:
+        invoicing: TRACE

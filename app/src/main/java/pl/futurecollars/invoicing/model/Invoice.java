@@ -15,6 +15,9 @@ import lombok.NoArgsConstructor;
 public class Invoice {
 
   private String id;
+
+  private String number;
+
   @ApiModelProperty(value = "operation date", example = "2023-02-28")
   private LocalDate date;
 
