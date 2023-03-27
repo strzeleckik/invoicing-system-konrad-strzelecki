@@ -53,6 +53,7 @@ dependencies {
     implementation "io.springfox:springfox-swagger-ui:${springfoxVersion}"
 
     implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     runtimeOnly 'org.postgresql:postgresql:42.2.19'
     runtimeOnly 'com.h2database:h2:1.4.200'
@@ -117,4 +118,6 @@ jacocoTestCoverageVerification {
 
 
     }
+
+
 }
