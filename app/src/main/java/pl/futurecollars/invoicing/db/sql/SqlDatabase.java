@@ -137,7 +137,7 @@ public class SqlDatabase implements Database {
               .quantity(response.getInt("quantity"))
               .netPrice(response.getBigDecimal("net_price"))
               .vatValue(response.getBigDecimal("vat_value"))
-              .vatRate(idToVat.get(response.getInt("vat_rate")))
+              .vatRate(Vat.valueOf(response.getString("vat_rate")))
               .expenseRelatedToCar(response.getObject("registration_number") != null
                   ? Car.builder()
                   .registrationNumber(response.getString("registration_number"))
@@ -239,7 +239,7 @@ public class SqlDatabase implements Database {
         ps.setInt(2, entry.getQuantity());
         ps.setBigDecimal(3, entry.getNetPrice());
         ps.setBigDecimal(4, entry.getVatValue());
-        ps.setInt(5, vatToId.get(entry.getVatRate()));
+        ps.setString(5, entry.getVatRate().name());
         ps.setObject(6, insertCarAndGetItId(entry.getExpenseRelatedToCar()));
         return ps;
       }, keyHolder);
