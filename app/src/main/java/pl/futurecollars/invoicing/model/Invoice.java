@@ -1,6 +1,7 @@
 package pl.futurecollars.invoicing.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.models.auth.In;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.CascadeType;

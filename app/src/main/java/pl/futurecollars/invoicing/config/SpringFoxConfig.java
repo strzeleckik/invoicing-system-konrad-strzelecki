@@ -35,9 +35,9 @@ public class SpringFoxConfig {
         .title("Private Invoicing")
         .contact(
             new Contact(
-                "Piotr Kolacz",
-                "https://passionatesoftwareengineer.com",
-                "piotr@passionatesoftwareengineer.com")
+                "Konrad Konrad",
+                "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                "ww@ww.com")
         )
         .build();
   }
