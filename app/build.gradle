@@ -8,6 +8,7 @@ buildscript {
         groovyVersion = '3.0.9'
         fasterxmlVersion = '2.11.1'
         springfoxVersion = '3.0.0'
+        mongoVersion = '3.12.12'
     }
 }
 
@@ -57,6 +58,7 @@ dependencies {
 
     runtimeOnly 'org.postgresql:postgresql:42.2.19'
     runtimeOnly 'com.h2database:h2:1.4.200'
+    implementation "org.mongodb:mongo-java-driver:${mongoVersion}"
     implementation "org.flywaydb:flyway-core:${flywayVersion}"
 
 }
