@@ -36,35 +36,35 @@ import pl.futurecollars.invoicing.utils.JsonService;
 @Configuration
 public class DatabaseConfiguration {
 
-  @Bean
-  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "file")
-  public IdProvider idProvider(
-      FilesService filesService,
-      @Value("${invoicing-system.database.directory}") String databaseDirectory,
-      @Value("${invoicing-system.database.id.file}") String idFile
-  ) throws IOException {
-    Path idFilePath = Files.createTempFile(databaseDirectory, idFile);
-    return new IdProvider(idFilePath, filesService);
-  }
-
-  @Bean
-  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "file")
-  public Database fileBasedDatabase(
-      IdProvider idProvider,
-      FilesService filesService,
-      JsonService jsonService,
-      @Value("${invoicing-system.database.directory}") String databaseDirectory,
-      @Value("${invoicing-system.database.invoices.file}") String invoicesFile
-  ) throws IOException {
-    Path databaseFilePath = Files.createTempFile(databaseDirectory, invoicesFile);
-    return new FileBasedDatabase(databaseFilePath, idProvider, filesService, jsonService);
-  }
-
-  @Bean
-  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "sql")
-  public Database sqlDatabase(JdbcTemplate jdbcTemplate) {
-    return new SqlDatabase(jdbcTemplate);
-  }
+//  @Bean
+//  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "file")
+//  public IdProvider idProvider(
+//      FilesService filesService,
+//      @Value("${invoicing-system.database.directory}") String databaseDirectory,
+//      @Value("${invoicing-system.database.id.file}") String idFile
+//  ) throws IOException {
+//    Path idFilePath = Files.createTempFile(databaseDirectory, idFile);
+//    return new IdProvider(idFilePath, filesService);
+//  }
+//
+//  @Bean
+//  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "file")
+//  public Database fileBasedDatabase(
+//      IdProvider idProvider,
+//      FilesService filesService,
+//      JsonService jsonService,
+//      @Value("${invoicing-system.database.directory}") String databaseDirectory,
+//      @Value("${invoicing-system.database.invoices.file}") String invoicesFile
+//  ) throws IOException {
+//    Path databaseFilePath = Files.createTempFile(databaseDirectory, invoicesFile);
+//    return new FileBasedDatabase(databaseFilePath, idProvider, filesService, jsonService);
+//  }
+//
+//  @Bean
+//  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "sql")
+//  public Database sqlDatabase(JdbcTemplate jdbcTemplate) {
+//    return new SqlDatabase(jdbcTemplate);
+//  }
 
   @Bean
   @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "memory")
@@ -72,44 +72,44 @@ public class DatabaseConfiguration {
     return new InMemoryDatabase();
   }
 
-  @Bean
-  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "jpa")
-  public Database jpaDatabase(InvoiceRepository invoiceRepository) {
-    return new JpaDatabase(invoiceRepository);
-  }
+//  @Bean
+//  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "jpa")
+//  public Database jpaDatabase(InvoiceRepository invoiceRepository) {
+//    return new JpaDatabase(invoiceRepository);
+//  }
 
-  @Bean
-  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "mongo")
-  public MongoDatabase mongoDb(
-      @Value("${invoicing-system.database.name}") String databaseName
-  ) {
-    CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
-        fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-
-    MongoClientSettings settings = MongoClientSettings.builder()
-        .codecRegistry(pojoCodecRegistry)
-        .build();
-
-    MongoClient client = MongoClients.create(settings);
-    return client.getDatabase(databaseName);
-  }
-
-  @Bean
-  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "mongo")
-  public MongoIdProvider mongoIdProvider(
-      @Value("${invoicing-system.database.counter.collection}") String collectionName,
-      MongoDatabase mongoDb
-  ) {
-    MongoCollection<Document> collection = mongoDb.getCollection(collectionName);
-    return new MongoIdProvider(collection);
-  }
-
-  @Bean
-  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "mongo")
-  public Database mongoBasedDatabase(@Value("${invoicing-system.database.collection}") String databaseCollection,
-                                     MongoDatabase mongoDb,
-                                     MongoIdProvider mongoIdProvider) {
-    return new MongoBasedDatabase(mongoDb.getCollection(databaseCollection, Invoice.class), mongoIdProvider);
-  }
+//  @Bean
+//  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "mongo")
+//  public MongoDatabase mongoDb(
+//      @Value("${invoicing-system.database.name}") String databaseName
+//  ) {
+//    CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+//        fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+//
+//    MongoClientSettings settings = MongoClientSettings.builder()
+//        .codecRegistry(pojoCodecRegistry)
+//        .build();
+//
+//    MongoClient client = MongoClients.create(settings);
+//    return client.getDatabase(databaseName);
+//  }
+//
+//  @Bean
+//  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "mongo")
+//  public MongoIdProvider mongoIdProvider(
+//      @Value("${invoicing-system.database.counter.collection}") String collectionName,
+//      MongoDatabase mongoDb
+//  ) {
+//    MongoCollection<Document> collection = mongoDb.getCollection(collectionName);
+//    return new MongoIdProvider(collection);
+//  }
+//
+//  @Bean
+//  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "mongo")
+//  public Database mongoBasedDatabase(@Value("${invoicing-system.database.collection}") String databaseCollection,
+//                                     MongoDatabase mongoDb,
+//                                     MongoIdProvider mongoIdProvider) {
+//    return new MongoBasedDatabase(mongoDb.getCollection(databaseCollection, Invoice.class), mongoIdProvider);
+//  }
 
 }

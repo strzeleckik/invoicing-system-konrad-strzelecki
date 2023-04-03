@@ -11,34 +11,34 @@ import pl.futurecollars.invoicing.db.Database;
 import pl.futurecollars.invoicing.model.Invoice;
 
 @RequiredArgsConstructor
-public class MongoBasedDatabase implements Database {
+public class MongoBasedDatabase {
 
   private final MongoCollection<Invoice> collection;
 
   private final MongoIdProvider mongoIdProvider;
 
-  @Override
+  //@Override
   public int save(Invoice invoice) {
     invoice.setId(mongoIdProvider.getNextIdAndIncrement());
     collection.insertOne(invoice);
     return invoice.getId();
   }
 
-  @Override
+  //@Override
   public Optional<Invoice> getById(int id) {
     return Optional.ofNullable(
         collection.find(new Document("_id", id)).first()
     );
   }
 
-  @Override
+  //@Override
   public List<Invoice> getAll() {
     return StreamSupport
         .stream(collection.find().spliterator(), false)
         .collect(Collectors.toList());
   }
 
-  @Override
+ // @Override
   public Optional<Invoice> update(int id, Invoice updatedInvoice) {
     updatedInvoice.setId(id);
     return Optional.ofNullable(
@@ -46,7 +46,7 @@ public class MongoBasedDatabase implements Database {
     );
   }
 
-  @Override
+  //@Override
   public Optional<Invoice> delete(int id) {
     return Optional.ofNullable(
         collection.findOneAndDelete(new Document("_id", id))
