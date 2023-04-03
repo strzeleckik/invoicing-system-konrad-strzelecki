@@ -20,7 +20,7 @@ import pl.futurecollars.invoicing.model.InvoiceEntry;
 import pl.futurecollars.invoicing.model.Vat;
 
 @AllArgsConstructor
-public class SqlDatabase implements Database {
+public class SqlDatabase  {
 
   public static final String SELECT_QUERY = "select i.id, i.date, i.number, "
       + "c1.id as seller_id, c1.name as seller_name, c1.tax_identification_number as seller_tax_id, c1.address as seller_address, "
@@ -46,7 +46,7 @@ public class SqlDatabase implements Database {
         });
   }
 
-  @Override
+  //@Override
   @Transactional
   public int save(Invoice invoice) {
     int buyerId = insertCompany(invoice.getBuyer());
@@ -111,12 +111,12 @@ public class SqlDatabase implements Database {
     return keyHolder.getKey().intValue();
   }
 
-  @Override
+ // @Override
   public List<Invoice> getAll() {
     return jdbcTemplate.query(SELECT_QUERY, invoiceRowMapper());
   }
 
-  @Override
+  //@Override
   public Optional<Invoice> getById(int id) {
     List<Invoice> invoices = jdbcTemplate.query(SELECT_QUERY + " where i.id = " + id, invoiceRowMapper());
 
@@ -173,7 +173,7 @@ public class SqlDatabase implements Database {
     };
   }
 
-  @Override
+  //@Override
   @Transactional
   public Optional<Invoice> update(int id, Invoice updatedInvoice) {
     Optional<Invoice> originalInvoice = getById(id);
@@ -256,7 +256,7 @@ public class SqlDatabase implements Database {
     });
   }
 
-  @Override
+  //@Override
   @Transactional
   public Optional<Invoice> delete(int id) {
     Optional<Invoice> invoiceOptional = getById(id);

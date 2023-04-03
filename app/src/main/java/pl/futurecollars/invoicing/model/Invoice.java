@@ -14,13 +14,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.futurecollars.invoicing.db.WithId;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Invoice {
+public class Invoice implements WithId {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
