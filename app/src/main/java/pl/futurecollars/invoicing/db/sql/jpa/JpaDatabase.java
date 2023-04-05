@@ -10,31 +10,31 @@ import pl.futurecollars.invoicing.model.Invoice;
 
 @Slf4j
 @RequiredArgsConstructor
-public class JpaDatabase implements Database {
+public class JpaDatabase  {
 
   private final InvoiceRepository invoiceRepository;
 
-  @Override
+  //@Override
   public int save(Invoice invoice) {
     log.info("save(invoice = {})", invoice);
     return invoiceRepository.save(invoice).getId();
   }
 
-  @Override
+  //@Override
   public Optional<Invoice> getById(int id) {
     log.info("getById(invoice = {})", id);
     return invoiceRepository.findById(id);
 
   }
 
-  @Override
+  //@Override
   public List<Invoice> getAll() {
     List<Invoice> invoices = new ArrayList<>();
     invoiceRepository.findAll().forEach(invoices::add);
     return invoices;
   }
 
-  @Override
+  //@Override
   public Optional<Invoice> update(int id, Invoice updatedInvoice) {
     Optional<Invoice> invoiceOptional = invoiceRepository.findById(id);
 
@@ -50,7 +50,7 @@ public class JpaDatabase implements Database {
     return invoiceRepository.findById(id);
   }
 
-  @Override
+  //@Override
   public Optional<Invoice> delete(int id) {
     Optional<Invoice> invoiceOptional = invoiceRepository.findById(id);
     invoiceOptional.ifPresent(invoiceRepository::delete);

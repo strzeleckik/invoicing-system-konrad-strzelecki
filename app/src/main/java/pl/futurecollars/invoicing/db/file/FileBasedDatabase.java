@@ -12,14 +12,14 @@ import pl.futurecollars.invoicing.utils.FilesService;
 import pl.futurecollars.invoicing.utils.JsonService;
 
 @AllArgsConstructor
-public class FileBasedDatabase implements Database {
+public class FileBasedDatabase {
 
   private final Path databasePath;
   private final IdProvider idProvider;
   private final FilesService filesService;
   private final JsonService jsonService;
 
-  @Override
+  //@Override
   public int save(Invoice invoice) {
     try {
       invoice.setId(idProvider.getNextIdAndIncrement());
@@ -31,7 +31,7 @@ public class FileBasedDatabase implements Database {
     }
   }
 
-  @Override
+  //@Override
   public Optional<Invoice> getById(int id) {
     try {
       return filesService.readAllLines(databasePath)
@@ -44,7 +44,7 @@ public class FileBasedDatabase implements Database {
     }
   }
 
-  @Override
+  //@Override
   public List<Invoice> getAll() {
     try {
       return filesService.readAllLines(databasePath)
@@ -56,7 +56,7 @@ public class FileBasedDatabase implements Database {
     }
   }
 
-  @Override
+  //@Override
   public Optional<Invoice> update(int id, Invoice updatedInvoice) {
     try {
       List<String> allInvoices = filesService.readAllLines(databasePath);
@@ -79,7 +79,7 @@ public class FileBasedDatabase implements Database {
 
   }
 
-  @Override
+  //@Override
   public Optional<Invoice> delete(int id) {
     try {
       var allInvoices = filesService.readAllLines(databasePath);
