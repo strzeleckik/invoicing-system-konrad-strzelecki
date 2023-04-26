@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.futurecollars.invoicing.model.Company;
 import pl.futurecollars.invoicing.service.CompanyService;
 
-@CrossOrigin
 @RestController
 @AllArgsConstructor
 public class CompanyController implements CompanyApi {

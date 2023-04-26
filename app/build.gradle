@@ -3,7 +3,7 @@ buildscript {
         flywayVersion = '7.6.0'
         lombokVersion = '1.18.24'
         spockVersion = '2.0-groovy-3.0'
-        springBootVersion = '2.7.8'
+        springBootVersion = '2.4.2'
         springDependencyManagmentVersion = '1.1.0'
         groovyVersion = '3.0.9'
         fasterxmlVersion = '2.11.1'
@@ -51,6 +51,8 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter-web"
 
+    implementation "org.springframework.security:spring-security-test"
+    implementation "org.springframework.boot:spring-boot-starter-security"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     implementation "io.springfox:springfox-boot-starter:${springfoxVersion}"
     implementation "io.springfox:springfox-swagger-ui:${springfoxVersion}"

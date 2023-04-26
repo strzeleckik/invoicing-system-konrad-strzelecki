@@ -19,3 +19,10 @@ spring:
     active: memory
   flyway:
     enabled: false
+  security:
+    user:
+      name: konrad
+      password: trzaslo
+
+invoicing-system:
+  allowedOrigins: http://localhost:4200

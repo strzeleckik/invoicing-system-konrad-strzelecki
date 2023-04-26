@@ -12,14 +12,15 @@ const PATH = 'companies';
 export class CompanyService {
 
     private contentType = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        withCredentials: true
     };
 
     constructor(private http: HttpClient) {
     }
 
     getCompanies(): Observable<Company[]> {
-        return this.http.get<Company[]>(this.apiUrl(PATH));
+        return this.http.get<Company[]>(this.apiUrl(PATH), {withCredentials: true});
     }
 
     addCompany(company: Company): Observable<any> {
@@ -27,7 +28,7 @@ export class CompanyService {
     }
 
     deleteCompany(id: number): Observable<any> {
-        return this.http.delete<any>(this.apiUrl(PATH, id));
+        return this.http.delete<any>(this.apiUrl(PATH, id), {withCredentials: true});
     }
 
     editCompany(company: Company): Observable<any> {
