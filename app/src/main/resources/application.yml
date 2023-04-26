@@ -19,3 +19,8 @@ spring:
     active: memory
   flyway:
     enabled: false
+
+invoicing-system:
+  allowedOrigins: http://localhost:4200
+  csrf:
+    disable: false

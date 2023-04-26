@@ -1,9 +1,13 @@
 package pl.futurecollars.invoicing.db
 
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.security.test.context.support.WithMockUser
 import pl.futurecollars.invoicing.model.Invoice
 import spock.lang.Specification
 
 import static pl.futurecollars.invoicing.helpers.TestHelpers.invoice
+
 
 abstract class AbstractDatabaseTest extends Specification {
 
